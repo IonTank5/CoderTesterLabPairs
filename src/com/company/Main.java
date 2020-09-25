@@ -5,7 +5,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.*;
 public class Main {
+    //Get name method
     public static String getName(int x){
+        //Skipping to the line passed to the method
         try(Stream<String> lines = Files.lines(Paths.get("C:\\Users\\jaked\\Documents\\People.txt"))){
             String name = lines.skip(x).findFirst().get();
             return name;
@@ -17,7 +19,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         try{
-
+            //Getting user input for choosing coder/tester first and all blocks/same blocks
             File people = new File("C:\\Users\\jaked\\Documents\\People.txt");
             Scanner read = new Scanner(people);
             int counter = 0, counter2 = 0;
@@ -40,6 +42,7 @@ public class Main {
             }
             read = new Scanner(people);
             System.out.println("There are " + counter + " people");
+            //Defining arrays and variables for later use
             boolean[] checker1 = new boolean[counter];
             boolean[] checker2 = new boolean[counter];
             int[] pairs = new int[counter];
@@ -56,6 +59,7 @@ public class Main {
                 name2  = getName(person2);
 
                 if(counter==counter2){
+                    //Checking if the amount of people in the file is equal to the amount of pairs
                     System.out.println("Everyone has a coder and a tester");
                     break;
                 }
@@ -71,10 +75,12 @@ public class Main {
                     }
                 }
                 else if((checker1[person1]==false&&checker2[person2]==false)&&(!(person1==person2))){
+                    //Checking if the people are the same and if they have not been used before
                     checker1[person1]=true;
                     checker2[person2]=true;
                     pairs[person1] = person2;
                     counter2++;
+                    //Adding the people to the arrays
                     names1[person1] = (name1.substring(name1.indexOf(",", name1.indexOf(",")+1)+1) + " " + name1.substring(name1.indexOf(",")+1, (name1.indexOf(",", name1.indexOf(",")+1))));
                     names2[person1] = name2.substring(name2.indexOf(",", name2.indexOf(",")+1)+1) + " " + name2.substring(name2.indexOf(",")+1, (name2.indexOf(",", name2.indexOf(",")+1)));
 
@@ -82,6 +88,7 @@ public class Main {
             }
             String temp;
             int tempNum;
+            //Alphabetizing the arrays
             for (int i = 0; i < counter; i++) {
                 for (int j = i+1; j < counter; j++) {
                     if (names1[i].compareToIgnoreCase(names1[j])>0){
@@ -98,6 +105,7 @@ public class Main {
                 }
             }
             int blockPrint = 1;
+            //Print statements checking for all the settings users can input
             if(block) {
                 System.out.println("Which block would you like to print out? (default is both)\n1. both\n2. only 1\n3. only 2");
                 blockPrint = in.nextInt();
